@@ -139,6 +139,7 @@
     [super viewDidLoad];
     
     // adds the scene's view
+    [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:[self.scene view]];
     [self.scene didMoveToParentViewController:self];
 }
