@@ -160,4 +160,29 @@
     // The linked scene defines supported orientations.
     return [self.scene supportedInterfaceOrientations];
 }
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    if ([super respondsToSelector:aSelector])
+        return YES;
+    else {
+        return [self.scene respondsToSelector:aSelector];
+    }
+    return NO;
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    NSMethodSignature* signature = [super methodSignatureForSelector:aSelector];
+    if (!signature) {
+        signature = [self.scene methodSignatureForSelector:aSelector];
+    }
+    return signature;
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    if ([self.scene respondsToSelector:[anInvocation selector]])
+        [anInvocation invokeWithTarget:self.scene];
+    else
+        [super forwardInvocation:anInvocation];
+}
+
 @end
