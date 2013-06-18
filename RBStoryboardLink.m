@@ -59,24 +59,6 @@
     
     self.scene = scene;
     
-    // Adjusts the frame of the child view.
-    CGRect frame = self.view.frame;
-    CGRect linkedFrame = scene.view.frame;
-    linkedFrame.origin.x -= frame.origin.x;
-    linkedFrame.origin.y -= frame.origin.y;
-    
-    // The scene's main view must be made flexible so it will resize properly 
-    // in the container. 
-    scene.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | 
-                                   UIViewAutoresizingFlexibleHeight);
-    
-    scene.view.frame = linkedFrame;
-    
-    // Adds the view controller as a child view.
-    [self addChildViewController:scene];
-    [self.view addSubview:scene.view];
-    [scene didMoveToParentViewController:self];
-    
     // Grabs the UINavigationItem stuff.
     UINavigationItem * navItem = self.navigationItem;
     UINavigationItem * linkedNavItem = scene.navigationItem;
@@ -137,6 +119,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIViewController *scene = self.scene;
+    
+    // Adjusts the frame of the child view.
+    CGRect frame = self.view.frame;
+    CGRect linkedFrame = scene.view.frame;
+    linkedFrame.origin.x -= frame.origin.x;
+    linkedFrame.origin.y -= frame.origin.y;
+    
+    // The scene's main view must be made flexible so it will resize properly
+    // in the container.
+    scene.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
+                                   UIViewAutoresizingFlexibleHeight);
+    
+    scene.view.frame = linkedFrame;
+    
+    // Adds the view controller as a child view.
+    [self addChildViewController:scene];
     
     // adds the scene's view
     [self.view setBackgroundColor:[UIColor clearColor]];
