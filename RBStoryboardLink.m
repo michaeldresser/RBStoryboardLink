@@ -133,7 +133,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIViewController * scene = self.scene;
+    UIViewController *scene = self.scene;
     
     // Adjusts the frame of the child view.
     CGRect frame = self.view.frame;
@@ -149,6 +149,9 @@
     scene.view.frame = linkedFrame;
     
     // Adds the view controller as a child view.
+    [self addChildViewController:scene];
+    
+    // adds the scene's view
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:scene.view];
     [scene didMoveToParentViewController:self];
