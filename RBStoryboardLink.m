@@ -213,20 +213,14 @@
 // The following methods are important to get unwind segues to work properly.
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
-    if ([super respondsToSelector:aSelector])
-        return YES;
-    else {
-        return [self.scene respondsToSelector:aSelector];
-    }
-    return NO;
+    return ([super respondsToSelector:aSelector] ||
+            [self.scene respondsToSelector:aSelector]);
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
-    NSMethodSignature* signature = [super methodSignatureForSelector:aSelector];
-    if (!signature) {
-        signature = [self.scene methodSignatureForSelector:aSelector];
-    }
-    return signature;
+    return ([super methodSignatureForSelector:aSelector]
+            ?:
+            [self.scene methodSignatureForSelector:aSelector]);
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {
