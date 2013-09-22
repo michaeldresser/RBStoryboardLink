@@ -136,7 +136,7 @@
     scene.view.frame = linkedFrame;
     
     // Adds the view controller as a child view.
-    [self addChildViewController:scene];
+    [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:scene.view];
     [scene didMoveToParentViewController:self];
     
