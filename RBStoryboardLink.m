@@ -144,24 +144,24 @@
     [self.view addSubview:scene.view];
     [self.scene didMoveToParentViewController:self];
     
-	if ([scene.view respondsToSelector: @selector(translatesAutoresizingMaskIntoConstraints)]) {
-		scene.view.translatesAutoresizingMaskIntoConstraints = NO;
-		
-		NSDictionary * views = @{
-								 @"topGuide"    : self.topLayoutGuide,
-								 @"bottomGuide" : self.bottomLayoutGuide,
-								 @"view"        : scene.view,
-								 };
-		
-		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
-																		  options:0
-																		  metrics:nil
-																			views:views]];
-		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][view][bottomGuide]"
-																		  options:0
-																		  metrics:nil
-																			views:views]];
-	} else {
+//	if ([scene.view respondsToSelector: @selector(translatesAutoresizingMaskIntoConstraints)]) {
+//		scene.view.translatesAutoresizingMaskIntoConstraints = NO;
+//		
+//		NSDictionary * views = @{
+//								 @"topGuide"    : self.topLayoutGuide,
+//								 @"bottomGuide" : self.bottomLayoutGuide,
+//								 @"view"        : scene.view,
+//								 };
+//		
+//		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
+//																		  options:0
+//																		  metrics:nil
+//																			views:views]];
+//		[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][view][bottomGuide]"
+//																		  options:0
+//																		  metrics:nil
+//																			views:views]];
+//	} else {
 		// Adjusts the frame of the child view.
 		CGRect frame = self.view.frame;
 		CGRect linkedFrame = scene.view.frame;
@@ -174,7 +174,7 @@
 									   UIViewAutoresizingFlexibleHeight);
 
 		scene.view.frame = linkedFrame;
-	}
+//	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {
