@@ -39,7 +39,18 @@
     
     NSAssert([self.storyboardName length], @"No storyboard name");
     
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:self.storyboardName bundle:nil];
+    UIStoryboard * storyboard;
+    NSString *storyboardName = self.storyboardName;
+    // Cry device specific story board files.
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        storyboardName = [self.storyboardName stringByAppendingString:@"_iPad"];
+    else
+        storyboardName = [self.storyboardName stringByAppendingString:@"_iPhone"];
+    if ([[NSBundle.mainBundle pathForResource:storyboardName ofType:@"storyboardc"] length])
+        storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    else
+        storyboard = [UIStoryboard storyboardWithName:self.storyboardName bundle:nil];
+
     UIViewController * scene = nil;
     
     // Creates the linked scene.
