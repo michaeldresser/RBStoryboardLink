@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
       :git => 'https://github.com/rob-brown/RBStoryboardLink.git', 
       :tag => '0.0.6'
   }
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '5.1'
   s.source_files = 'RBStoryboardLink.{h,m}'
   s.public_header_files = 'RBStoryboardLink.h'
   s.frameworks = 'UIKit'
