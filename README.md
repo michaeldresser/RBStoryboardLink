@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-`RBStoryboardLink` requires iOS 7.0+. With some modifications it can support iOS 6 as well, but I wanted to keep it simple. `RBStoryboardLink` cannot simultaneously support iOS 5 and 7 due to the large functionality differences. 
+`RBStoryboardLink` requires iModifications were made and - this branch is a FORK.
 
 ## How to use
 
