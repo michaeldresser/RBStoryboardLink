@@ -27,7 +27,6 @@
 
 @interface RBStoryboardLink ()
 
-@property (nonatomic, strong, readwrite) UIViewController * scene;
 
 @end
 
@@ -102,7 +101,6 @@
     self.providesPresentationContextTransitionStyle = scene.providesPresentationContextTransitionStyle;
     
     // Grabs the popover properties.
-    self.preferredContentSize = scene.preferredContentSize;
     self.modalInPopover = scene.modalInPopover;
     
     // Grabs miscellaneous properties.
@@ -110,12 +108,20 @@
     self.hidesBottomBarWhenPushed = scene.hidesBottomBarWhenPushed;
     self.editing = scene.editing;
     
-    // Translucent bar properties.
-    self.automaticallyAdjustsScrollViewInsets = scene.automaticallyAdjustsScrollViewInsets;
-    self.edgesForExtendedLayout = scene.edgesForExtendedLayout;
-    self.extendedLayoutIncludesOpaqueBars = scene.extendedLayoutIncludesOpaqueBars;
-    self.modalPresentationCapturesStatusBarAppearance = scene.modalPresentationCapturesStatusBarAppearance;
-    self.transitioningDelegate = scene.transitioningDelegate;
+    /**
+     * iOS 7 only
+     */
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1){
+        // pop over
+        self.preferredContentSize = scene.preferredContentSize;
+        // translucent bar
+        self.automaticallyAdjustsScrollViewInsets = scene.automaticallyAdjustsScrollViewInsets;
+        // Translucent bar properties.
+        self.edgesForExtendedLayout = scene.edgesForExtendedLayout;
+        self.extendedLayoutIncludesOpaqueBars = scene.extendedLayoutIncludesOpaqueBars;
+        self.modalPresentationCapturesStatusBarAppearance = scene.modalPresentationCapturesStatusBarAppearance;
+        self.transitioningDelegate = scene.transitioningDelegate;
+    }
 }
 
 - (void)viewDidLoad {
@@ -129,20 +135,37 @@
     
     scene.view.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary * views = @{
-                             @"topGuide"    : self.topLayoutGuide,
-                             @"bottomGuide" : self.bottomLayoutGuide,
-                             @"view"        : scene.view,
-                             };
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][view][bottomGuide]"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:views]];
+    NSDictionary *views = [NSDictionary dictionary];
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1){
+        views =
+        @{
+          @"topGuide"    : self.topLayoutGuide,
+          @"bottomGuide" : self.bottomLayoutGuide,
+          @"view"        : scene.view,
+          };
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][view][bottomGuide]"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:views]];
+        
+    } else {
+        views =
+        @{
+          @"view"        : scene.view
+          };
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:views]];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
