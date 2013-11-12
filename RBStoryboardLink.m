@@ -38,21 +38,8 @@
     [super awakeFromNib];
     
     NSAssert([self.storyboardName length], @"No storyboard name");
-
-    UIStoryboard * storyboard;
-    NSString *storyboardName = self.storyboardName;
-    // Cry device specific story board files.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        storyboardName = [self.storyboardName stringByAppendingString:@"_iPad"];
-    } else {
-        storyboardName = [self.storyboardName stringByAppendingString:@"_iPhone"];
-    }
-    if ([[[NSBundle mainBundle] pathForResource:storyboardName ofType:@"storyboardc"] length]) {
-        storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
-    } else {
-        storyboard = [UIStoryboard storyboardWithName:self.storyboardName bundle:nil];
-    }
-
+    
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:self.storyboardName bundle:nil];
     UIViewController * scene = nil;
     
     // Creates the linked scene.
@@ -134,27 +121,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIViewController *scene = self.scene;
-    
-    // Adjusts the frame of the child view.
-    CGRect frame = self.view.frame;
-    CGRect linkedFrame = scene.view.frame;
-    linkedFrame.origin.x -= frame.origin.x;
-    linkedFrame.origin.y -= frame.origin.y;
-    
-    // The scene's main view must be made flexible so it will resize properly
-    // in the container.
-    scene.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
-                                   UIViewAutoresizingFlexibleHeight);
-    
-    scene.view.frame = linkedFrame;
-    
     // Adds the view controller as a child view.
     UIViewController * scene = self.scene;
     [self addChildViewController:scene];
-    
-    // adds the scene's view
-    [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:scene.view];
     [self.scene didMoveToParentViewController:self];
     
@@ -236,6 +205,10 @@
 
 - (BOOL)prefersStatusBarHidden {
     return [self.scene prefersStatusBarHidden];
+}
+
+- (id<UIViewControllerTransitionCoordinator>)transitionCoordinator {
+    return [self.scene transitionCoordinator] ?: [super transitionCoordinator];
 }
 
 
