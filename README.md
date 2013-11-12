@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-`RBStoryboardLink` requires iModifications were made and - this branch is a FORK.
+`RBStoryboardLink` requires iOS 6.0+. Modifications were made that differentiate this from its parent - this branch is a FORK.
 
 ## How to use
 
