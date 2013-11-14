@@ -52,7 +52,7 @@
              self.storyboardName,
              self.sceneIdentifier);
     
-    self.scene = scene;
+    _scene = scene;
     
     // Grabs the UINavigationItem stuff.
     UINavigationItem * navItem = self.navigationItem;
@@ -135,37 +135,18 @@
     
     scene.view.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSDictionary *views = [NSDictionary dictionary];
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1){
-        views =
-        @{
-          @"topGuide"    : self.topLayoutGuide,
-          @"bottomGuide" : self.bottomLayoutGuide,
-          @"view"        : scene.view,
-          };
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][view][bottomGuide]"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-        
-    } else {
-        views =
-        @{
-          @"view"        : scene.view
-          };
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-    }
+    views =
+    @{
+      @"view"        : scene.view
+      };
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:views]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
