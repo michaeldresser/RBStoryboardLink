@@ -135,10 +135,7 @@
     
     scene.view.translatesAutoresizingMaskIntoConstraints = NO;
     
-    views =
-    @{
-      @"view"        : scene.view
-      };
+    NSDictionary *views = @{ @"view": scene.view };
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
                                                                       options:0
                                                                       metrics:nil
