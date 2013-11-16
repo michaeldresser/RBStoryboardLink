@@ -153,10 +153,7 @@
                                                                             views:views]];
         
     } else {
-        views =
-        @{
-          @"view"        : scene.view
-          };
+        views = @{@"views" : scene.view};
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
                                                                           options:0
                                                                           metrics:nil
