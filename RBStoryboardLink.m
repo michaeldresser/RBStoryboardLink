@@ -145,36 +145,48 @@
     [self.view addSubview:scene.view];
     [self.scene didMoveToParentViewController:self];
 
-    scene.view.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    NSDictionary *views = [NSDictionary dictionary];
-    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1){
-        views =
-        @{
-          @"topGuide"    : self.topLayoutGuide,
-          @"bottomGuide" : self.bottomLayoutGuide,
-          @"view"        : scene.view,
-          };
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][view][bottomGuide]"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-        
-    } else {
-        views = @{@"views" : scene.view};
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
-                                                                          options:0
-                                                                          metrics:nil
-                                                                            views:views]];
-    }
+//    scene.view.translatesAutoresizingMaskIntoConstraints = NO;
+//    
+//    NSDictionary *views = [NSDictionary dictionary];
+//    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1){
+//        views =
+//        @{
+//          @"topGuide"    : self.topLayoutGuide,
+//          @"bottomGuide" : self.bottomLayoutGuide,
+//          @"view"        : scene.view,
+//          };
+//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
+//                                                                          options:0
+//                                                                          metrics:nil
+//                                                                            views:views]];
+//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide][view][bottomGuide]"
+//                                                                          options:0
+//                                                                          metrics:nil
+//                                                                            views:views]];
+//        
+//    } else {
+//        views = @{@"views" : scene.view};
+//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
+//                                                                          options:0
+//                                                                          metrics:nil
+//                                                                            views:views]];
+//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
+//                                                                          options:0
+//                                                                          metrics:nil
+//                                                                            views:views]];
+//    }
+	// Adjusts the frame of the child view.
+	CGRect frame = self.view.frame;
+	CGRect linkedFrame = scene.view.frame;
+	linkedFrame.origin.x -= frame.origin.x;
+	linkedFrame.origin.y -= frame.origin.y;
+
+	// The scene's main view must be made flexible so it will resize properly
+	// in the container.
+	scene.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
+								   UIViewAutoresizingFlexibleHeight);
+
+	scene.view.frame = linkedFrame;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
