@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-`RBStoryboardLink` requires iOS 7.0+. With some modifications it can support iOS 6 as well, but I wanted to keep it simple. `RBStoryboardLink` cannot simultaneously support iOS 5 and 7 due to the large functionality differences. 
+`RBStoryboardLink` requires iOS 6.0+. Modifications were made that differentiate this from its parent - this branch is a FORK.
 
 ## How to use
 
@@ -36,6 +36,10 @@ There are two demos that are provided to show how to use `RBStoryboardLink`:
 
 * A tabbed workflow. 
 
+## Contribution
+
+Contributions are welcomed. I'm much more responsive to pull requests rather than issues. The sample apps use [KIF][2] for automated testing. Any pull requests must pass the tests before they will be merged. If new functionality is introduced, the pull requests must also add tests for the new behavior. 
+
 ## License
 
 `RBStoryboardLink` is licensed under the MIT license, which is reproduced in its entirety here:
@@ -61,3 +65,4 @@ There are two demos that are provided to show how to use `RBStoryboardLink`:
 >THE SOFTWARE.
 
   [1]: http://robsprogramknowledge.blogspot.com/2012/01/uistoryboard-best-practices.html
+  [2]: https://github.com/kif-framework/KIF
