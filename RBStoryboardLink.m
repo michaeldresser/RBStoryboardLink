@@ -64,7 +64,7 @@
              self.storyboardName,
              self.sceneIdentifier);
     
-    self.scene = scene;
+    _scene = scene;
     
     // Grabs the UINavigationItem stuff.
     UINavigationItem * navItem = self.navigationItem;
@@ -147,7 +147,7 @@
 
 //    scene.view.translatesAutoresizingMaskIntoConstraints = NO;
 //    
-//    NSDictionary *views = [NSDictionary dictionary];
+//    NSDictionary *views = nil;
 //    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1){
 //        views =
 //        @{
