@@ -119,6 +119,11 @@
     self.transitioningDelegate = scene.transitioningDelegate;
 }
 
+- (void)dealloc
+{
+    self.transitioningDelegate = nil;
+}
+
 - (NSString *)vertialConstraintString {
     
     // Defaults to using top and bottom layout guides.
