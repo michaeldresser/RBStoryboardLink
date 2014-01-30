@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.author       = 'Robert Brown'
   s.source       = { 
       :git => 'https://github.com/rob-brown/RBStoryboardLink.git', 
-      :tag => '0.0.8'
+      :tag => '0.0.8-ifm'
   }
   s.platform     = :ios, '7.0'
   s.source_files = 'RBStoryboardLink.{h,m}', 'UIViewController+RBStoryboardLink.{h,m}', 'RBStoryboardLinkSource.h'
