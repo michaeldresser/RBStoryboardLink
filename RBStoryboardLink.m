@@ -137,6 +137,10 @@
     }
 }
 
+- (void)dealloc {
+    self.transitioningDelegate = nil;
+}
+
 - (NSString *)verticalConstraintString {
     
     // Defaults to using top and bottom layout guides.
