@@ -138,7 +138,9 @@
 }
 
 - (void)dealloc {
-    self.transitioningDelegate = nil;
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1){
+        self.transitioningDelegate = nil;
+    }
 }
 
 - (NSString *)verticalConstraintString {
